@@ -1,0 +1,28 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int i=0,j=1,profit=0;
+        int temp=0;
+        while(i<j && j<prices.length)
+        {
+            System.out.println(i+"          "+j+"               "+prices.length);
+            if(prices[i]>prices[j])
+            {
+                i=j;
+                j++;
+            }
+            else if(prices[i]<prices[j])
+            {
+                temp=prices[j]-prices[i];
+                if(profit<temp)
+                profit=temp;
+                j++;
+            }
+            else{
+                i=j;
+                j++;
+            }
+            
+        }
+        return profit;
+    }
+}
