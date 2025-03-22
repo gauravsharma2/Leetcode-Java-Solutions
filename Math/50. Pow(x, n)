@@ -1,0 +1,22 @@
+class Solution {
+    public double myPow(double x, long n) {
+        if(x==1)
+        return 1;
+        System.out.println("n"+" "+n);
+        if(n==0)
+        return 1;
+        if (n < 0) {
+            return 1.0 / myPow(x, -n);
+        }
+        if(n%2==0)
+        {
+            double v=myPow(x,n/2);
+            System.out.println(v);
+            return v*v;
+        }
+        else
+        {
+            return myPow(x,n-1)*x;
+        }
+    }
+}
