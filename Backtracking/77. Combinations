@@ -1,0 +1,20 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> output = new ArrayList<>();
+        permute(1, new ArrayList<Integer>(), output, n, k);
+        
+        return output;
+    }
+    
+    public void permute(int pos, List<Integer> set, List<List<Integer>> output, int n, int k){
+        if(set.size() == k){
+            output.add(new ArrayList<>(set));
+            return;
+        }
+        for(int i = pos; i <= n; i++){
+            set.add(new Integer(i));
+            permute(i+1, set, output, n, k);
+            set.remove(new Integer(i));
+        }
+    }
+}
