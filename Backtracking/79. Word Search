@@ -1,0 +1,46 @@
+class Solution {
+    private int m, n;
+    
+    public boolean exist(char[][] board, String word) {
+        m = board.length;
+        n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    if (backtrack(board, visited, i, j, word, 0)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    private boolean backtrack(char[][] board,
+                              boolean[][] visited,
+                              int i, int j,
+                              String word,
+                              int index) {
+        if (index == word.length()) {
+            return true;
+        }
+        if (i < 0 || i >= m || j < 0 || j >= n
+         || visited[i][j]
+         || board[i][j] != word.charAt(index)) {
+            return false;
+        }
+        
+        visited[i][j] = true;
+        boolean found =
+            backtrack(board, visited, i + 1, j,     word, index + 1)
+         || backtrack(board, visited, i - 1, j,     word, index + 1)
+         || backtrack(board, visited, i,     j + 1, word, index + 1)
+         || backtrack(board, visited, i,     j - 1, word, index + 1);
+        
+        visited[i][j] = false;
+        
+        return found;
+    }
+}
